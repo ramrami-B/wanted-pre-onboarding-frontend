@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# 원티드 프리온보딩 프론트엔드 - 선발 과제
+## 지원자의 성명
+## 프로젝트의 실행 방법
+## 데모 영상
+---
+## ✔️ 사용가능한 라이브러리 목록
+- React Router
+- HTTP Client 라이브러리(Axios 등)
+- 스타일링 관련 라이브러리(Sass, Styled Components, Emotion, tailwind 등)
+- 아이콘 등 UI 관련 라이브러리(Font-Awesome, React-Icons, Bootstrap 등)
+- 기능과 직접적인 연관이 없는 설정관련 라이브러리(craco, dotenv, typescript, testing library 등)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 개발 해야 할 것들
+### 1. 로그인 / 회원가입
+- [ ] 로그인, 회원가입 페이지에 이메일 input, 비밀번호 input, 제출 button 만들기
+    - `/signup` 경로에 회원가입 기능을 개발
+    - `/signin` 경로에 로그인 기능을 개발
+- [ ] 이메일과 비밀번호의 유효성 검사기능 개발
+  - 이메일 조건: @ 포함
+  - 비밀번호 조건: 8자 이상
+  - 입력된 이메일과 비밀번호가 유효성 검사를 통과하지 못한다면 button에 disabled 속성을 부여
+- [ ] 회원가입 페이지에서 버튼 클릭 시, 회원가입 진행, 회원가입이 완료되면 `/signin` 경로로 이동
+- [ ] 로그인 페이지에서 버튼 클릭 시, 로그인을 진행, 로그인이 완료되면 `/todo` 경로로 이동
+  - 로그인 API는 로그인이 성공했을 시 Response Body에 JWT를 포함해서 응답 -> 응답받은 JWT는 로컬 스토리지에 저장
+- [ ] 로그인 여부에 따른 리다이렉트 처리 구현
+  - 로컬 스토리지에 토큰이 있는 상태로 `/signin` 또는 `/signup` 페이지에 접속시, `/todo` 경로로 리다이렉트
+  - 로컬 스토리지에 토큰이 없는 상태로 `/todo`에 접속한다면 `/signin` 경로로 리다이렉트 
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 2. TODO LIST
+- [ ] `/todo` 경로 접속시, 투두 리스트 목록(TODO의 내용과 완료 여부) 나오기
+- [ ] 새로운 TODO를 입력할 수 있는 input과 추가 button 만들기
+- [ ] TODO의 체크박스를 통해 완료 여부를 수정할 수 있도록 하기
+- [ ] TODO 우측에 수정버튼, 삭제 버튼 만들기
+- [ ] 투두 리스트의 삭제 기능 구현
+- [ ] 투두 리스트의 수정 기능 구현
