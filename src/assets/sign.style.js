@@ -22,10 +22,9 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
+  width: 40%;
   display: flex;
-  width: 50%;
-  padding: 0.5em;
-  margin: 1em 0;
-  justify-content: center;
+  padding: 1em;
   margin: 1em auto;
+  justify-content: center;
 `;
