@@ -9,6 +9,10 @@ export default function SignUp() {
   const [isAblePassword, setIsAblePassword] = useState(false);
 
   useEffect(() => {
+    if (localStorage.getItem("access_token")) window.location.href = "/todo";
+  }, []);
+
+  useEffect(() => {
     if (email.includes("@")) {
       setIsAbleEmail(true);
     } else {
