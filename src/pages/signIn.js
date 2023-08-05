@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as S from "../assets/sign.style";
+import { signIn } from "../service/sign.service";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ export default function SignIn() {
     } else {
       setIsAbleEmail(false);
     }
-    
+
     if (password.length > 7) {
       setIsAblePassword(true);
     } else {
@@ -29,7 +30,8 @@ export default function SignIn() {
   }
 
   function onClickSignInButton() {
-    console.log(email, password);
+    // console.log(email, password);
+    signIn({ email: email, password: password });
   }
 
   return (

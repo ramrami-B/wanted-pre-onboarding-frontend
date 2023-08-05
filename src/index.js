@@ -5,7 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import SignUp from "./pages/signUp";
-import SignIn from "./pages/signIn";
+import { ToDo } from "./pages/todo";
+import SignIn from "./pages/SignIn";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/todo",
+    element: <ToDo />,
   },
 ]);
 

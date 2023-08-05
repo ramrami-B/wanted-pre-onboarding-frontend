@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as S from "../assets/sign.style";
+import { signUp } from "../service/sign.service";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ export default function SignUp() {
     } else {
       setIsAbleEmail(false);
     }
-    
+
     if (password.length > 7) {
       setIsAblePassword(true);
     } else {
@@ -29,7 +30,7 @@ export default function SignUp() {
   }
 
   function onClickSignUpButton() {
-    console.log(email, password);
+    signUp({ email: email, password: password });
   }
 
   return (
