@@ -21,6 +21,7 @@ export function ToDo() {
   useEffect(() => {
     getTodo().then((datas) => {
       setTodos(Object.values(datas));
+      setIsTodoChange(false);
     });
   }, [isTodoChange]);
 
@@ -37,7 +38,7 @@ export function ToDo() {
       todo: data.todo,
       isCompleted: e.target.checked,
     });
-    setIsTodoChange(!isTodoChange);
+    setIsTodoChange(true);
   }
 
   function onClickSubmitButton(e, data) {
@@ -45,18 +46,19 @@ export function ToDo() {
       todo: modifiedTodo,
       isCompleted: data.isCompleted,
     });
-    setIsTodoChange(!isTodoChange);
+    setIsTodoChange(true);
     setIsEditModeIdx(-1);
   }
 
   function addNewTodo() {
     createTodo({ id: 1, todo: todo, isCompleted: false, userId: 1 });
-    setIsTodoChange(!isTodoChange);
+    setIsTodoChange(true);
+    setTodo("");
   }
 
   function onClickDeleteButton(e, id) {
     deleteTodo(id);
-    setIsTodoChange(!isTodoChange);
+    setIsTodoChange(true);
   }
 
   function onClickCancelButton() {
@@ -66,9 +68,10 @@ export function ToDo() {
   return (
     <S.Layout>
       <S.NewTodoDiv>
-        <S.NewTodoInput
+        <S.TodoInput
           data-testid="new-todo-input"
           onChange={onChangeNewTodo}
+          value={todo}
         />
         <S.NewTodoAddButton
           data-testid="new-todo-add-button"
@@ -90,10 +93,10 @@ export function ToDo() {
                 defaultChecked={data.isCompleted ? true : false}
               />
               {idx === isEditModeIdx ? (
-                <input
+                <S.TodoInput
                   data-testid="modify-input"
                   onChange={onChangeModifyTodo}
-                ></input>
+                ></S.TodoInput>
               ) : (
                 <span>{data.todo}</span>
               )}

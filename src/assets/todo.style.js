@@ -15,7 +15,7 @@ export const NewTodoDiv = styled.div`
   margin: 0 auto;
 `;
 
-export const NewTodoInput = styled.input`
+export const TodoInput = styled.input`
   width: 60%;
   padding: 0.5em;
 `;

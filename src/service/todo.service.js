@@ -12,7 +12,7 @@ export async function createTodo(data) {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     });
-    res.status === 201 && console.log(res);
+    res.status === 201 && alert("TODO가 추가되었습니다!");
   } catch (e) {
     console.log(e);
   }
@@ -38,7 +38,10 @@ export async function updateTodo(id, data) {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     });
-    if (res.status === 200) return res.data;
+    if (res.status === 200) {
+      alert("TODO가 수정되었습니다.");
+      return res.data;
+    }
   } catch (e) {
     console.log(e);
   }
