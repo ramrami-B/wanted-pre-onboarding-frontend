@@ -43,3 +43,16 @@ export async function updateTodo(id, data) {
     console.log(e);
   }
 }
+
+export async function deleteTodo(id) {
+  try {
+    const res = await axios.delete(API + TODO_URL + `/${id}`, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    });
+    res.status === 204 && alert("TODO가 삭제되었습니다.");
+  } catch (e) {
+    console.log(e);
+  }
+}

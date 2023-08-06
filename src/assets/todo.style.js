@@ -5,7 +5,7 @@ export const Layout = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 1em;
 `;
 
 export const NewTodoDiv = styled.div`
@@ -20,23 +20,35 @@ export const NewTodoInput = styled.input`
   padding: 0.5em;
 `;
 
-export const NewTodoButton = styled.button`
+export const NewTodoAddButton = styled.button`
   width: 30%;
   padding: 0.5em;
 `;
 
 export const Li = styled.li`
   list-style: none;
-  margin: 0 auto;
+  margin: 0.2em auto;
   width: 50%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const TodoLabel = styled.label`
   margin: 0.5em 0.1em;
+  width: 70%;
 `;
 
 export const CheckBox = styled.input`
   padding: 0.2em;
+`;
+
+export const ButtonsDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+`;
+
+export const Button = styled.button`
+  width: 50%;
+  padding: 0.1em;
 `;
