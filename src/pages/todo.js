@@ -29,6 +29,12 @@ export function ToDo() {
     setTodo(e.target.value);
   }
 
+  function addNewTodo() {
+    createTodo({ id: 1, todo: todo, isCompleted: false, userId: 1 });
+    setIsTodoChange(true);
+    setTodo("");
+  }
+
   function onChangeModifyTodo(e) {
     setModifiedTodo(e.target.value);
   }
@@ -50,12 +56,6 @@ export function ToDo() {
     setIsEditModeIdx(-1);
   }
 
-  function addNewTodo() {
-    createTodo({ id: 1, todo: todo, isCompleted: false, userId: 1 });
-    setIsTodoChange(true);
-    setTodo("");
-  }
-
   function onClickDeleteButton(e, id) {
     deleteTodo(id);
     setIsTodoChange(true);
@@ -64,6 +64,26 @@ export function ToDo() {
   function onClickCancelButton() {
     setIsEditModeIdx(-1);
   }
+
+  // Component
+  const DoubleButton = (props) => {
+    return (
+      <S.ButtonsDiv>
+        <S.Button
+          data-testid={props.testIdList[0]}
+          onClick={(e) => props.onClickList[0](e, props.paramList[0])}
+        >
+          {props.textList[0]}
+        </S.Button>
+        <S.Button
+          data-testid={props.testIdList[1]}
+          onClick={(e) => props.onClickList[1](e, props.paramList[1])}
+        >
+          {props.textList[1]}
+        </S.Button>
+      </S.ButtonsDiv>
+    );
+  };
 
   return (
     <S.Layout>
@@ -80,6 +100,8 @@ export function ToDo() {
           추가
         </S.NewTodoAddButton>
       </S.NewTodoDiv>
+
+      {/* TODO LIST */}
       {todos.map((data, idx) => {
         function onClickModifyButton(e, idx) {
           setIsEditModeIdx(idx);
@@ -102,35 +124,19 @@ export function ToDo() {
               )}
             </S.TodoLabel>
             {idx === isEditModeIdx ? (
-              <S.ButtonsDiv>
-                <S.Button
-                  data-testid="submit-button"
-                  onClick={(e) => onClickSubmitButton(e, data)}
-                >
-                  제출
-                </S.Button>
-                <S.Button
-                  data-testid="cancel-button"
-                  onClick={onClickCancelButton}
-                >
-                  취소
-                </S.Button>
-              </S.ButtonsDiv>
+              <DoubleButton
+                textList={["제출", "취소"]}
+                testIdList={["submit-button", "cancel-button"]}
+                onClickList={[onClickSubmitButton, onClickCancelButton]}
+                paramList={[data, null]}
+              />
             ) : (
-              <S.ButtonsDiv>
-                <S.Button
-                  data-testid="modify-button"
-                  onClick={(e) => onClickModifyButton(e, idx)}
-                >
-                  수정
-                </S.Button>
-                <S.Button
-                  data-testid="delete-button"
-                  onClick={(e) => onClickDeleteButton(e, data.id)}
-                >
-                  삭제
-                </S.Button>
-              </S.ButtonsDiv>
+              <DoubleButton
+                textList={["수정", "삭제"]}
+                testIdList={["modify-button", "delete-button"]}
+                onClickList={[onClickModifyButton, onClickDeleteButton]}
+                paramList={[idx, data.id]}
+              />
             )}
           </S.Li>
         );
