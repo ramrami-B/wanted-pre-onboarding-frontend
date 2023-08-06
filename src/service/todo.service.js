@@ -30,3 +30,16 @@ export async function getTodo() {
     console.log(e);
   }
 }
+
+export async function updateTodo(id, data) {
+  try {
+    const res = await axios.put(API + TODO_URL + `/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    });
+    if (res.status === 200) return res.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
