@@ -45,7 +45,11 @@ export default function SignUp() {
       </S.InputDiv>
       <S.InputDiv>
         <p>Password: </p>
-        <S.Input data-testid="password-input" onChange={onChangePassword} />
+        <S.Input
+          type="password"
+          data-testid="password-input"
+          onChange={onChangePassword}
+        />
       </S.InputDiv>
       {isAbleEmail && isAblePassword ? (
         <S.Button data-testid="signup-button" onClick={onClickSignUpButton}>

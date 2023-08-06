@@ -45,7 +45,7 @@ export default function SignIn() {
       </S.InputDiv>
       <S.InputDiv>
         <p>Password: </p>
-        <S.Input data-testid="password-input" onChange={onChangePassword} />
+        <S.Input type="password" data-testid="password-input" onChange={onChangePassword} />
       </S.InputDiv>
       {isAbleEmail && isAblePassword ? (
         <S.Button data-testid="signin-button" onClick={onClickSignInButton}>
