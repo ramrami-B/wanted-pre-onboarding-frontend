@@ -2,17 +2,16 @@
 ## 지원자의 성명
 백하람
 ## 프로젝트의 실행 방법
+- version node v18.17.0 (npm v9.6.7)
+
 `git clone https://github.com/ramrami-B/wanted-pre-onboarding-frontend.git`
 
-`npm init`
-
-`npm run build`
-
-`npm install -g serve`
+`npm install`
 
 `npm run build`
 
 `serve -s build`
+
 ## 데모 영상
 https://shorturl.at/ghrPV
 
