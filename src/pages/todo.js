@@ -13,19 +13,22 @@ import CheckBox from "../component/CheckBox";
 export default function Todo() {
   const [todo, setTodo] = useState("");
   const [todoData, setTodoData] = useState([]);
-  const [isTodoChange, setIsTodoChange] = useState(false);
   const [editIndex, setEditIndex] = useState(-1);
 
   useEffect(() => {
     !localStorage.getItem("access_token") && window.location.href("/signin");
+    updateTodoState();
   }, []);
 
   useEffect(() => {
+    updateTodoState();
+  }, [todoData]);
+
+  function updateTodoState() {
     getTodo().then((datas) => {
       setTodoData(Object.values(datas));
-      setIsTodoChange(false);
     });
-  }, [isTodoChange]);
+  }
 
   function onChangeTodo(e) {
     setTodo(e.target.value);
@@ -33,7 +36,7 @@ export default function Todo() {
 
   function addNewTodo() {
     createTodo({ id: 1, todo: todo, isCompleted: false, userId: 1 });
-    setIsTodoChange(true);
+    updateTodoState();
     setTodo("");
   }
 
@@ -42,7 +45,7 @@ export default function Todo() {
       todo: data.todo,
       isCompleted: e.target.checked,
     });
-    setIsTodoChange(true);
+    updateTodoState();
   }
 
   function onClickSubmit(e, data) {
@@ -50,13 +53,13 @@ export default function Todo() {
       todo: todo,
       isCompleted: data.isCompleted,
     });
-    setIsTodoChange(true);
+    updateTodoState();
     setEditIndex(-1);
   }
 
   function onClickDelete(e, id) {
     deleteTodo(id);
-    setIsTodoChange(true);
+    updateTodoState();
   }
 
   function onClickCancel() {
