@@ -1,65 +1,59 @@
 import { useEffect, useState } from "react";
-import * as S from "../assets/sign.style";
 import { signIn } from "../service/sign.service";
+import Button from "../component/Button";
+import SignInput from "../component/SignInput";
+import { styled } from "styled-components";
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isAbleEmail, setIsAbleEmail] = useState(false);
-  const [isAblePassword, setIsAblePassword] = useState(false);
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const [isAble, setIsAble] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("access_token")) window.location.href = "/todo";
+    localStorage.getItem("access_token") && window.location.href("/todo");
   }, []);
 
   useEffect(() => {
-    if (email.includes("@")) {
-      setIsAbleEmail(true);
+    if (values.email.includes("@") && values.password.length > 7) {
+      setIsAble(true);
     } else {
-      setIsAbleEmail(false);
+      setIsAble(false);
     }
-
-    if (password.length > 7) {
-      setIsAblePassword(true);
-    } else {
-      setIsAblePassword(false);
-    }
-  }, [email, password]);
+  }, [values]);
 
   function onChangeEmail(e) {
-    setEmail(e.target.value);
+    setValues({ ...values, email: e.target.value });
   }
   function onChangePassword(e) {
-    setPassword(e.target.value);
+    setValues({ ...values, password: e.target.value });
   }
 
   function onClickSignInButton() {
-    signIn({ email: email, password: password });
+    signIn(values);
   }
 
   return (
-    <S.Layout>
-      <S.InputDiv>
-        <p>Email: </p>
-        <S.Input data-testid="email-input" onChange={onChangeEmail} />
-      </S.InputDiv>
-      <S.InputDiv>
-        <p>Password: </p>
-        <S.Input type="password" data-testid="password-input" onChange={onChangePassword} />
-      </S.InputDiv>
-      {isAbleEmail && isAblePassword ? (
-        <S.Button data-testid="signin-button" onClick={onClickSignInButton}>
-          로그인
-        </S.Button>
-      ) : (
-        <S.Button
-          data-testid="signin-button"
-          onClick={onClickSignInButton}
-          disabled
-        >
-          로그인
-        </S.Button>
-      )}
-    </S.Layout>
+    <Layout>
+      <SignInput
+        onChangeEmail={onChangeEmail}
+        onChangePassword={onChangePassword}
+      />
+      <Button
+        text="로그인"
+        testId="signin-button"
+        onClick={onClickSignInButton}
+        disabled={isAble ? false : true}
+      />
+    </Layout>
   );
 }
+
+const Layout = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;

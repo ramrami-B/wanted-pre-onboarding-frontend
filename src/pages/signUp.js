@@ -1,69 +1,59 @@
 import { useEffect, useState } from "react";
-import * as S from "../assets/sign.style";
 import { signUp } from "../service/sign.service";
+import Button from "../component/Button";
+import Input from "../component/SignInput";
+import { styled } from "styled-components";
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isAbleEmail, setIsAbleEmail] = useState(false);
-  const [isAblePassword, setIsAblePassword] = useState(false);
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const [isAble, setIsAble] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("access_token")) window.location.href = "/todo";
   }, []);
 
   useEffect(() => {
-    if (email.includes("@")) {
-      setIsAbleEmail(true);
+    if (values.email.includes("@") && values.password.length > 7) {
+      setIsAble(true);
     } else {
-      setIsAbleEmail(false);
+      setIsAble(false);
     }
-
-    if (password.length > 7) {
-      setIsAblePassword(true);
-    } else {
-      setIsAblePassword(false);
-    }
-  }, [email, password]);
+  }, [values]);
 
   function onChangeEmail(e) {
-    setEmail(e.target.value);
+    setValues({ ...values, email: e.target.value });
   }
   function onChangePassword(e) {
-    setPassword(e.target.value);
+    setValues({ ...values, password: e.target.value });
   }
 
   function onClickSignUpButton() {
-    signUp({ email: email, password: password });
+    signUp(values);
   }
 
   return (
-    <S.Layout>
-      <S.InputDiv>
-        <p>Email: </p>
-        <S.Input data-testid="email-input" onChange={onChangeEmail} />
-      </S.InputDiv>
-      <S.InputDiv>
-        <p>Password: </p>
-        <S.Input
-          type="password"
-          data-testid="password-input"
-          onChange={onChangePassword}
-        />
-      </S.InputDiv>
-      {isAbleEmail && isAblePassword ? (
-        <S.Button data-testid="signup-button" onClick={onClickSignUpButton}>
-          회원가입
-        </S.Button>
-      ) : (
-        <S.Button
-          data-testid="signup-button"
-          onClick={onClickSignUpButton}
-          disabled
-        >
-          회원가입
-        </S.Button>
-      )}
-    </S.Layout>
+    <Layout>
+      <Input
+        onChangeEmail={onChangeEmail}
+        onChangePassword={onChangePassword}
+      />
+      <Button
+        text="회원가입"
+        testId="signup-button"
+        onClick={onClickSignUpButton}
+        disabled={isAble ? false : true}
+      />
+    </Layout>
   );
 }
+
+const Layout = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
