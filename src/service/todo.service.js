@@ -5,6 +5,11 @@ const TODO_URL = "/todos";
 
 const ACCESS_TOKEN = localStorage.getItem("access_token");
 
+export function initInput() {
+  let newTodoInput = document.getElementById("new-todo-input");
+  newTodoInput.value = null;
+}
+
 export async function createTodo(data) {
   try {
     const res = await axios.post(API + TODO_URL, data, {
