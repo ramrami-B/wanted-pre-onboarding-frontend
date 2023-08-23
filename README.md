@@ -12,6 +12,9 @@
 
 `serve -s build`
 
+## 배포 링크
+https://wanted-pre-onboarding-frontend-iktd6zlla-ramrami-b.vercel.app/signin
+
 ## 데모 영상
 https://shorturl.at/ghrPV
 
