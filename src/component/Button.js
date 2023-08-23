@@ -7,7 +7,7 @@ export default function Button(props) {
       data-testid={props.testId}
       onClick={props.onClick}
       disabled={props.disabled}
-      size={props.size}
+      height={props.height}
     >
       {props.text}
     </StyledButton>
@@ -15,9 +15,18 @@ export default function Button(props) {
 }
 
 const StyledButton = styled.button`
-  width: ${(props) => props.size}%;
+  width: 100%;
+  height: ${(props) => props.height}rem;
   display: flex;
-  padding: 1em;
   margin: auto;
+  padding: 0;
   justify-content: center;
+  align-items:center;
+  border: none;
+  border-radius: 0.25rem;
+  background: #96b6c5;
+  color: #f1f0e8;
+  outline: none;
+  font-family: KOTRA HOPE;
+  font-size: 2.25rem;
 `;

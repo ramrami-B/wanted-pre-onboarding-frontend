@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { signIn } from "../service/sign.service";
 import Button from "../component/Button";
-import SignInput from "../component/SignInput";
-import { styled } from "styled-components";
+import { Div, Input, Layout } from "../component/style/sign.style";
 
 export default function SignIn() {
   const [values, setValues] = useState({
@@ -12,7 +11,7 @@ export default function SignIn() {
   const [isAble, setIsAble] = useState(false);
 
   useEffect(() => {
-    localStorage.getItem("access_token") && window.location.href("/todo");
+    if (localStorage.getItem("access_token")) window.location.href = "/todo";
   }, []);
 
   useEffect(() => {
@@ -36,25 +35,26 @@ export default function SignIn() {
 
   return (
     <Layout>
-      <SignInput
-        onChangeEmail={onChangeEmail}
-        onChangePassword={onChangePassword}
-      />
-      <Button
-        text="로그인"
-        testId="signin-button"
-        onClick={onClickSignInButton}
-        disabled={isAble ? false : true}
-        size={40}
-      />
+      <Div>
+        <Input
+          data-testid="email-input"
+          onChange={onChangeEmail}
+          placeholder="이메일을 입력하세요"
+        />
+        <Input
+          type="password"
+          data-testid="password-input"
+          onChange={onChangePassword}
+          placeholder="비밀번호를 입력하세요"
+        />
+        <Button
+          text="로그인"
+          testId="signin-button"
+          onClick={onClickSignInButton}
+          disabled={isAble ? false : true}
+          height={5}
+        />
+      </Div>
     </Layout>
   );
 }
-
-const Layout = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;

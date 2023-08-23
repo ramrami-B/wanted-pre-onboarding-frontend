@@ -1,11 +1,11 @@
-import "./App.css";
+import { useEffect } from "react";
 
 function App() {
-  return (
-    <div>
-      <h1>원티드 프리온보딩 프론트엔드 - 선발 과제</h1>
-    </div>
-  );
+  useEffect(() => {
+    localStorage.getItem("access_token")
+      ? (window.location.href = "/todo")
+      : (window.location.href = "/signin");
+  });
 }
 
 export default App;

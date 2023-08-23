@@ -5,8 +5,7 @@ export default function SignInput(props) {
   return (
     <>
       <InputDiv>
-        <p>Email: </p>
-        <Input data-testid="email-input" onChange={props.onChangeEmail} />
+        <Input data-testid="email-input" onChange={props.onChangeEmail} placeholder="이메일을 입력하세요"/>
       </InputDiv>
       <InputDiv>
         <p>Password: </p>
@@ -14,6 +13,7 @@ export default function SignInput(props) {
           type="password"
           data-testid="password-input"
           onChange={props.onChangePassword}
+          placeholder="비밀번호를 입력하세요"
         />
       </InputDiv>
     </>

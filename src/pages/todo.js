@@ -16,7 +16,7 @@ export default function Todo() {
   const [editIndex, setEditIndex] = useState(-1);
 
   useEffect(() => {
-    !localStorage.getItem("access_token") && window.location.href("/signin");
+    if(!localStorage.getItem("access_token")) window.location.href = "/signin";
     updateTodoState();
   }, []);
 
