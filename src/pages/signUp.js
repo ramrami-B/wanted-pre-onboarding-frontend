@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { signUp } from "../service/sign.service";
 import Button from "../component/Button";
 import { Div, Input, Layout } from "../component/style/sign.style";
+import TextButton from "../component/TextButton";
 
 export default function SignUp() {
   const [values, setValues] = useState({
@@ -54,6 +55,7 @@ export default function SignUp() {
           disabled={isAble ? false : true}
           height={5}
         />
+        <TextButton href="/signin" text="로그인 하기" />
       </Div>
     </Layout>
   );
