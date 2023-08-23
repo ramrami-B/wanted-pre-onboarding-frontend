@@ -8,9 +8,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import SignUp from "./pages/signUp";
-import { ToDo } from "./pages/todo";
-import SignIn from "./pages/signIn";
+import SignUp from "./pages/SignUp";
+import Todo from "./pages/Todo";
+import SignIn from "./pages/SignIn";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/todo",
-    element: <ToDo />,
+    element: <Todo />,
   },
 ]);
 

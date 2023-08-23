@@ -10,7 +10,7 @@ import { styled } from "styled-components";
 import Button from "../component/Button";
 import CheckBox from "../component/CheckBox";
 
-export function ToDo() {
+export default function Todo() {
   const [todo, setTodo] = useState("");
   const [todoData, setTodoData] = useState([]);
   const [isTodoChange, setIsTodoChange] = useState(false);
