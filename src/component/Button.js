@@ -24,7 +24,7 @@ const StyledButton = styled.button`
   align-items:center;
   border: none;
   border-radius: 0.25rem;
-  background: #96b6c5;
+  background: ${(props) => props.disabled ? "#B3B3B3" : "#96b6c5"};
   color: #f1f0e8;
   outline: none;
   font-family: KOTRA HOPE;
