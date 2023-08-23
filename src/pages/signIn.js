@@ -45,6 +45,7 @@ export default function SignIn() {
         testId="signin-button"
         onClick={onClickSignInButton}
         disabled={isAble ? false : true}
+        size={40}
       />
     </Layout>
   );

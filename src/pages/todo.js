@@ -1,4 +1,3 @@
-import * as S from "../assets/todo.style";
 import { useEffect, useState } from "react";
 import {
   createTodo,
@@ -6,26 +5,29 @@ import {
   getTodo,
   updateTodo,
 } from "../service/todo.service";
+import DoubleButton from "../component/DoubleButton";
+import { styled } from "styled-components";
+import Button from "../component/Button";
+import CheckBox from "../component/CheckBox";
 
 export function ToDo() {
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
-  const [modifiedTodo, setModifiedTodo] = useState("");
+  const [todoData, setTodoData] = useState([]);
   const [isTodoChange, setIsTodoChange] = useState(false);
-  const [isEditModeIdx, setIsEditModeIdx] = useState(-1);
+  const [editIndex, setEditIndex] = useState(-1);
 
   useEffect(() => {
-    if (!localStorage.getItem("access_token")) window.location.href = "/signin";
+    !localStorage.getItem("access_token") && window.location.href("/signin");
   }, []);
 
   useEffect(() => {
     getTodo().then((datas) => {
-      setTodos(Object.values(datas));
+      setTodoData(Object.values(datas));
       setIsTodoChange(false);
     });
   }, [isTodoChange]);
 
-  function onChangeNewTodo(e) {
+  function onChangeTodo(e) {
     setTodo(e.target.value);
   }
 
@@ -35,11 +37,7 @@ export function ToDo() {
     setTodo("");
   }
 
-  function onChangeModifyTodo(e) {
-    setModifiedTodo(e.target.value);
-  }
-
-  function onCheckBoxClicked(e, data) {
+  function onClickCheckBox(e, data) {
     updateTodo(data.id, {
       todo: data.todo,
       isCompleted: e.target.checked,
@@ -47,100 +45,114 @@ export function ToDo() {
     setIsTodoChange(true);
   }
 
-  function onClickSubmitButton(e, data) {
+  function onClickSubmit(e, data) {
     updateTodo(data.id, {
-      todo: modifiedTodo,
+      todo: todo,
       isCompleted: data.isCompleted,
     });
     setIsTodoChange(true);
-    setIsEditModeIdx(-1);
+    setEditIndex(-1);
   }
 
-  function onClickDeleteButton(e, id) {
+  function onClickDelete(e, id) {
     deleteTodo(id);
     setIsTodoChange(true);
   }
 
-  function onClickCancelButton() {
-    setIsEditModeIdx(-1);
+  function onClickCancel() {
+    setEditIndex(-1);
   }
 
-  // Component
-  const DoubleButton = (props) => {
-    return (
-      <S.ButtonsDiv>
-        <S.Button
-          data-testid={props.testIdList[0]}
-          onClick={(e) => props.onClickList[0](e, props.paramList[0])}
-        >
-          {props.textList[0]}
-        </S.Button>
-        <S.Button
-          data-testid={props.testIdList[1]}
-          onClick={(e) => props.onClickList[1](e, props.paramList[1])}
-        >
-          {props.textList[1]}
-        </S.Button>
-      </S.ButtonsDiv>
-    );
-  };
-
   return (
-    <S.Layout>
-      <S.NewTodoDiv>
-        <S.TodoInput
+    <Layout>
+      <AddTodoDiv>
+        <TodoInput
           data-testid="new-todo-input"
-          onChange={onChangeNewTodo}
+          onChange={onChangeTodo}
           value={todo}
         />
-        <S.NewTodoAddButton
-          data-testid="new-todo-add-button"
+        <Button
+          testId="new-todo-add-button"
           onClick={addNewTodo}
-        >
-          추가
-        </S.NewTodoAddButton>
-      </S.NewTodoDiv>
+          disabled={false}
+          size={30}
+          text="추가"
+        ></Button>
+      </AddTodoDiv>
 
       {/* TODO LIST */}
-      {todos.map((data, idx) => {
-        function onClickModifyButton(e, idx) {
-          setIsEditModeIdx(idx);
+      {todoData.map((data, idx) => {
+        function onClickModify(idx) {
+          setEditIndex(idx);
         }
         return (
-          <S.Li key={idx}>
-            <S.TodoLabel>
-              <S.CheckBox
-                type="checkbox"
-                onClick={(e) => onCheckBoxClicked(e, data)}
+          <Li key={idx}>
+            <TodoLabel>
+              <CheckBox
+                onClick={(e) => onClickCheckBox(e, data)}
                 defaultChecked={data.isCompleted ? true : false}
               />
-              {idx === isEditModeIdx ? (
-                <S.TodoInput
+              {idx === editIndex ? (
+                <TodoInput
                   data-testid="modify-input"
-                  onChange={onChangeModifyTodo}
-                ></S.TodoInput>
+                  onChange={onChangeTodo}
+                ></TodoInput>
               ) : (
                 <span>{data.todo}</span>
               )}
-            </S.TodoLabel>
-            {idx === isEditModeIdx ? (
+            </TodoLabel>
+
+            {idx === editIndex ? (
               <DoubleButton
                 textList={["제출", "취소"]}
                 testIdList={["submit-button", "cancel-button"]}
-                onClickList={[onClickSubmitButton, onClickCancelButton]}
+                onClickList={[onClickSubmit, onClickCancel]}
                 paramList={[data, null]}
               />
             ) : (
               <DoubleButton
                 textList={["수정", "삭제"]}
                 testIdList={["modify-button", "delete-button"]}
-                onClickList={[onClickModifyButton, onClickDeleteButton]}
+                onClickList={[onClickModify, onClickDelete]}
                 paramList={[idx, data.id]}
               />
             )}
-          </S.Li>
+          </Li>
         );
       })}
-    </S.Layout>
+    </Layout>
   );
 }
+
+export const Layout = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+`;
+
+export const AddTodoDiv = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+`;
+
+export const TodoInput = styled.input`
+  width: 60%;
+  padding: 0.5em;
+`;
+
+const Li = styled.li`
+  list-style: none;
+  margin: 0.2em auto;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const TodoLabel = styled.label`
+  margin: 0.5em 0.1em;
+  width: 70%;
+`;

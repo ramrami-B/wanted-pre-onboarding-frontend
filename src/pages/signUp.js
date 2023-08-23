@@ -45,6 +45,7 @@ export default function SignUp() {
         testId="signup-button"
         onClick={onClickSignUpButton}
         disabled={isAble ? false : true}
+        size={40}
       />
     </Layout>
   );
