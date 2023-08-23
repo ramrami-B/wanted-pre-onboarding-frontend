@@ -50,15 +50,17 @@ const Li = styled.li`
   margin: 0.2em auto;
   width: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const Label = styled.label`
-  margin: 0.5em 0.1em;
-  width: 70%;
+  width: 50%;
+  height: 2rem;
 `;
 
 const TodoInput = styled.input`
-  width: 60%;
-  padding: 0.5em;
+  width: 80%;
+  height: 100%;
+  // padding: 0.2rem;
+  border: none;
 `;

@@ -39,6 +39,7 @@ export default function Todo() {
   function addNewTodo() {
     createTodo({ id: 1, todo: todo, isCompleted: false, userId: 1 });
     initInput();
+    setTodo("");
     updateTodoState();
   }
 
@@ -55,6 +56,8 @@ export default function Todo() {
       todo: todo,
       isCompleted: data.isCompleted,
     });
+    initInput();
+    setTodo("");
     updateTodoState();
     setEditIndex(-1);
   }
@@ -80,8 +83,8 @@ export default function Todo() {
           testId="new-todo-add-button"
           onClick={addNewTodo}
           disabled={false}
-          size={35}
           text="추가"
+          height={3.125}
         ></Button>
       </AddTodoDiv>
 
@@ -116,6 +119,8 @@ const AddTodoDiv = styled.div`
 `;
 
 const TodoInput = styled.input`
-  width: 60%;
+  width: 180%;
   padding: 0.5em;
+  margin-right: 0.5rem;
+  border: none;
 `;

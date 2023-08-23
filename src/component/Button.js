@@ -28,5 +28,5 @@ const StyledButton = styled.button`
   color: #f1f0e8;
   outline: none;
   font-family: KOTRA HOPE;
-  font-size: 2.25rem;
+  font-size: 2rem;
 `;
