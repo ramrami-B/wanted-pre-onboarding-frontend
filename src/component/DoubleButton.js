@@ -1,20 +1,23 @@
 import { styled } from "styled-components";
+import Button from "./Button";
 
 export default function DoubleButton(props) {
   return (
     <ButtonDiv>
       <Button
-        data-testid={props.testIdList[0]}
+        testId={props.testIdList[0]}
         onClick={(e) => props.onClickList[0](e, props.paramList[0])}
-      >
-        {props.textList[0]}
-      </Button>
+        disabled={false}
+        size={100}
+        text={props.textList[0]}
+      />
       <Button
-        data-testid={props.testIdList[1]}
+        testId={props.testIdList[1]}
         onClick={(e) => props.onClickList[1](e, props.paramList[1])}
-      >
-        {props.textList[1]}
-      </Button>
+        disabled={false}
+        size={100}
+        text={props.textList[1]}
+      />
     </ButtonDiv>
   );
 }
@@ -23,9 +26,4 @@ const ButtonDiv = styled.div`
   display: flex;
   flex-direction: row;
   width: 30%;
-`;
-
-const Button = styled.button`
-  width: 50%;
-  padding: 0.1em;
 `;
